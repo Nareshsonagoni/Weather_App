@@ -15,7 +15,7 @@ def format_weather(weather):
         name = weather['name']
         desc = weather['weather'][0]['description']
         temp = weather['main']['temp']
-        final_str = 'City: %s \nConditions: %s \nTemperature (*C): %s' % (
+        final_str = 'City: %s \nConditions: %s \nTemperature (*C):%s' % (
             name, desc, temp)
     except:
         final_str = 'There is a problem retrieving the information'
@@ -61,7 +61,7 @@ lower_frame = tk.Frame(root, bg='#80c1ff', bd=10)
 lower_frame.place(relx=0.5, rely=0.25, relwidth=0.75,
                   relheight=0.6, anchor='n')
 
-label = tk.Label(lower_frame)
+label = tk.Label(lower_frame, font=40)
 label.place(relwidth=1, relheight=1)
 
 
