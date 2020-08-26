@@ -10,15 +10,30 @@ def test_function(entry):
     print("This is the entry", entry)
 
 
+def format_weather(weather):
+    try:
+        name = weather['name']
+        desc = weather['weather'][0]['description']
+        temp = weather['main']['temp']
+        final_str = 'City: %s \nConditions: %s \nTemperature (*C): %s' % (
+            name, desc, temp)
+    except:
+        final_str = 'There is a problem retrieving the information'
+
+    return final_str
+
+
 def get_weather(city):
     weather_key = "a1391ae778b5b595e6aa29d9a1340eea"
-    url = "https://api.openweathermap.org/data/2.5/forecast"
+    url = "https://api.openweathermap.org/data/2.5/weather"
     params = {'APPID': weather_key, 'q': city, 'units': 'Metric'}
     response = rq.get(url, params=params)
-    print(response.json())
+    weather = response.json()
+
+    label['text'] = format_weather(weather)
 
 
-# a1391ae778b5b595e6aa29d9a1340eea
+# a1391ae778b5b595e6aa29d9a1340eea  bg='#33FFA1'
 
 # api.openweathermap.org/data/2.5/forecast?id={city ID}&appid={your api key}
 
@@ -28,7 +43,7 @@ root = tk.Tk()
 canvas = tk.Canvas(root, height=Height, width=Width)
 canvas.pack()
 
-# background_image = ImageTk.PhotoImage(file='./trees.jpg')
+# background_image = tk.PhotoImage(file='natural.png')
 background_label = tk.Label(root, bg='#33FFA1')
 background_label.place(relwidth=1, relheight=1)
 
